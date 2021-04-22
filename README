@@ -1,0 +1,47 @@
+Author:
+Florian Millet
+
+Date:
+22/04/2021
+
+Version:
+1.0.0
+
+Description:
+This package allows to take Hi-NET and F-NET archived data from the Hi-NET website
+(https://hinetwww11.bosai.go.jp/auth/download/cont/, identification required) and turn
+them into ObsPy-like PICKLE and XML files including individual station/channel response.
+
+Folders:
+ - executables       : contains the data, metadata and format transcription codes
+ - input_data        : contains the archived data in zip or tar.gz format
+ - output_data       : contains the intermediate (inside given folder) and final ('-jap') files
+ - responses_as_of_X : contains the station responses as found on the Hi-NET website
+
+How to use:
+ (1) Download data from the Hi-NET website
+      This code covers both Hi-NET and F-NET data, but only in the Hi-NET website download format
+      Be careful about GMT to JST conversion and maximum cumulative request time
+      The data can be downloaded in multiple chunks as long as they are on the same JST day
+      Two events cannot happen on the same JST day, this will most likely break the code
+
+ (2) Place all the archives in the 'input_folder' directory
+      No need to create multiple folders for individual events
+      If several events are on the same JST day, copy and process them individually
+
+ (3) Run the 'process_jp_data.py' script in the executable folder
+      You might have to change your python path at the top of the code
+      You have to adapt the list of events to your dataset ('events')
+      This code expands, reads, merges and saves the 'win' archives in an ObsPy format
+      This can be quite long as there are many slow internal non-python steps
+      The intermediate data are stored in the 'output_data/[event]/' folders with the JST date
+
+ (4) Run the 'japan_metadata.py' script in the executable folder
+      You might have to change your python path at the top of the code
+      You have to adapt the currently processed event to your dataset ('ev_time')
+      The first part of the code ('compute_response') needs to be run only once
+      This code section reads and saves the dataless-SEED station response files in an ObsPy format
+      The second part of the code ('create_xml') needs to be run for all the events individually
+      This code section reads and attaches the station responses to an event-specific station XML tree
+      Stations with an undefined response are removed at this stage (more likely Hi-NET than F-NET)
+      The final data are stored in the 'output_data/' folder with the GMT date
