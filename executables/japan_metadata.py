@@ -37,6 +37,9 @@ print()
 print(str(ev_time)[:19])
 print(str(ev_japn)[:19])
 print()
+if not os.path.exists(fld+ouf):
+    os.makedirs(fld+ouf)
+
 
 #---------------------------------------------------#
 # Turn XSEED into STATIONXML for all response files #
