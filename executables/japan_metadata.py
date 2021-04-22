@@ -25,7 +25,7 @@ from   obspy.core.inventory import Inventory, Network, Station, Channel, Site, R
 from   obspy.io.xseed       import Parser
 
 # Definitions
-compute_responses = True  #False #
+compute_responses = False #True  #
 create_xml        = True  #False #
 ev_time = UTCDateTime(2010,4,11,22,8,11) #"2010-04-11T22:08:11")
 ev_japn = ev_time + 9*60*60
@@ -206,8 +206,8 @@ if create_xml:
                 com = ['Z', 'N', 'E']
                 azi = [ 0 ,  0 , 90 ]
                 dip = [-90,  0 ,  0 ]
-                cha = Channel(code          = "HH"+com[k]   ,
-                              location_code = ""            ,
+                cha = Channel(code          = "BH"+com[k]   ,
+                              location_code = tra.stats.location,
                               latitude      = tra.stats.stla,
                               longitude     = tra.stats.stlo,
                               elevation     = 0.0, #tra.stats.stel,
