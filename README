@@ -15,7 +15,7 @@ them into ObsPy-like PICKLE and XML files including individual station/channel r
 Folders:
  - executables       : contains the data, metadata and format transcription codes
  - input_data        : contains the archived data in zip or tar.gz format
- - output_data       : contains the intermediate (inside given folder) and final ('-jap') files
+ - output_data       : contains the intermediate (event folder) and final ('-jap') files [generated]
  - responses_as_of_X : contains the station responses as found on the Hi-NET website
 
 How to use:
