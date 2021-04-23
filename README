@@ -14,6 +14,11 @@ them into ObsPy-like PICKLE and XML files including individual station/channel r
 F-NET has broadband and strong motion sensors that can be downloaded separately.
 Hi-NET has high frequency sensors only (1Hz corner frequency).
 
+Example input files:
+The example provided is the deep south Spain 11th of April 2010 event.
+The .zip archives contain data for 5 F-NET and 5 Hi-NET stations around the 
+Ibaraki Prefecture and span from 10 minutes before the event to 70 minutes after.
+
 Folders:
  - executables       : contains the data, metadata and format transcription codes
  - input_data        : contains the archived data in zip or tar.gz format
