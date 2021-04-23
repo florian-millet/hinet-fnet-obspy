@@ -11,6 +11,8 @@ Description:
 This package allows to take Hi-NET and F-NET archived data from the Hi-NET website
 (https://hinetwww11.bosai.go.jp/auth/download/cont/, identification required) and turn
 them into ObsPy-like PICKLE and XML files including individual station/channel response.
+F-NET has broadband and strong motion sensors that can be downloaded separately.
+Hi-NET has high frequency sensors only (1Hz corner frequency).
 
 Folders:
  - executables       : contains the data, metadata and format transcription codes
