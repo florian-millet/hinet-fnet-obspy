@@ -2,14 +2,15 @@ Author:
 Florian Millet
 
 Date:
-22/04/2021
+27/04/2021
 
 Version:
-1.0.0
+1.0.1
 
 Description:
 This package allows to take Hi-NET and F-NET archived data from the Hi-NET website
-(https://hinetwww11.bosai.go.jp/auth/download/cont/, identification required) and turn
+(https://hinetwww11.bosai.go.jp/auth/download/cont/, identification required) or F-NET website
+() and turn
 them into ObsPy-like PICKLE and XML files including individual station/channel response.
 F-NET has broadband and strong motion sensors that can be downloaded separately.
 Hi-NET has high frequency sensors only (1Hz lower corner frequency).
@@ -22,17 +23,17 @@ Ibaraki Prefecture and span from 10 minutes before the event to 70 minutes after
 Folders:
  - executables       : contains the data, metadata and format transcription codes
  - input_data        : contains the archived data in zip or tar.gz format
- - output_data       : contains the intermediate (event folder) and final ('-jap') files [generated]
+ - output_data       : contains the intermediate (SAC or WIN) and final (PICKLE) files [generated]
  - responses_as_of_X : contains the station responses as found on the Hi-NET website
 
-How to use:
+How to use for data obtained with Hi-NET:
  (1) Download data from the Hi-NET website
       This code covers both Hi-NET and F-NET data, but only in the Hi-NET website download format
       Be careful about GMT to JST conversion and maximum cumulative request time
       The data can be downloaded in multiple chunks as long as they are on the same JST day
       Two events cannot happen on the same JST day, this will most likely break the code
 
- (2) Place all the archives in the 'input_folder' directory
+ (2) Place all the archives in the 'input_folder/hinet/' directory
       No need to create multiple folders for individual events
       If several events are on the same JST day, copy and process them individually
 
@@ -52,3 +53,15 @@ How to use:
       This code section reads and attaches the station responses to an event-specific station XML tree
       Stations with an undefined response are removed at this stage (more likely Hi-NET than F-NET)
       The final data are stored in the 'output_data/' folder with the GMT date
+
+How to use for data obtained with F-NET:
+ (1) Download data from the F-NET website
+      This code covers only F-NET data downloaded through the F-NET website
+
+ (2) Place all the archives in the 'input_folder/fnet/' directory
+      No need to create multiple folders for individual events
+
+ (3) Run the 'process_fnet.py' script in the executable folder
+      The code checks the correspondance between file name and event time using the request start/end times
+      If the actual event time is not within your request time, adjust the 'delay' parameter accordingly
+      This time the response files are directly attached to the traces
